@@ -22,5 +22,13 @@
   {
     "name": "TGD",
     "color": "#ffac07"
+  },
+  {
+    "name": "Crafts",
+    "color": "#ff0054"
+  },
+  {
+    "name": "Plantetes",
+    "color": "#00ff55"
   }
 ]

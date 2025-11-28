@@ -75,5 +75,49 @@
     "color": "#ffac07",
     "start": "2026-01-25",
     "end": "2026-01-25"
+  },
+  {
+    "id": "de5987b1-2ea4-4be1-bac9-81313bcbc4ba",
+    "title": "Pulir cristals",
+    "description": "",
+    "category": "Crafts",
+    "status": "TODO",
+    "allDay": true,
+    "color": "#ff0054",
+    "start": null,
+    "end": null
+  },
+  {
+    "id": "59050ac1-2187-4316-bad1-34b46e5cec36",
+    "title": "Netejar geoda",
+    "description": "",
+    "category": "Crafts",
+    "status": "TODO",
+    "allDay": true,
+    "color": "#ff0054",
+    "start": null,
+    "end": null
+  },
+  {
+    "id": "d7fa97c2-ea44-4396-8cc0-e86cabadb5a8",
+    "title": "Transplantar Poto",
+    "description": "",
+    "category": "Plantetes",
+    "status": "TODO",
+    "allDay": true,
+    "color": "#00ff55",
+    "start": null,
+    "end": null
+  },
+  {
+    "id": "8d714856-5852-4186-9203-b946ff44f3d7",
+    "title": "Plantar crasules",
+    "description": "En primavera",
+    "category": "Plantetes",
+    "status": "TODO",
+    "allDay": true,
+    "color": "#00ff55",
+    "start": null,
+    "end": null
   }
 ]
