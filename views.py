@@ -7,9 +7,30 @@ from streamlit_calendar import calendar
 
 
 def calendar_view(events):
+    events_for_calendar = []
+    for task in events:
+        # skip backlog tasks if you want, or include them
+        if task.get("start") is None:
+            continue
+
+        event = {
+            "id": task["id"],
+            "title": task["title"],
+            "start": task["start"],
+            "end": task.get("end"),
+            "allDay": task["allDay"],
+            "backgroundColor": task.get("color"),
+            "borderColor": task.get("color"),
+            "extendedProps": {
+                "description": task.get("description"),
+                "category": task.get("category"),
+                # you can add more fields here
+            }
+        }
+        events_for_calendar.append(event)
     # --- Calendar (editable) ---
     state = calendar(
-        events=events,
+        events=events_for_calendar,
         options={
             "initialView": "dayGridMonth",
             "firstDay": 1,
@@ -19,14 +40,24 @@ def calendar_view(events):
         key="task_calendar"
     )
 
+    if state and state.get("eventClick"):
+        ev = state["eventClick"]["event"]
+        message = f"{ev['title']} ({ev['extendedProps'].get('category')})\n"
+        message += f"{ev['start']}\n\n\n" if ev['allDay'] else f"{ev['start']} → {ev.get('end')}\n"
+        message += f"{ev['extendedProps'].get('description')}"
+        st.toast(
+            message,
+            icon="📌",
+            duration=5     # seconds
+        )
+
     # --- Handle drag (eventDrop) updates ---
     if state and state.get("eventChange"):
         dropped = state["eventChange"]["event"]  # dict from FullCalendar about moved event
         # Try to get a reliable id and new start
         event_id = dropped.get("id") or dropped.get("extendedProps", {}).get("id")
         new_start_raw = dropped.get("startStr") or dropped.get("start") or dropped.get("start_time") or dropped.get("date")
-        new_start = to_date_str(new_start_raw)
-        print(new_start_raw)
+        new_start = to_date_str(new_start_raw)        
 
         # find matching event in session_state
         updated = False
@@ -59,10 +90,7 @@ def calendar_view(events):
         else:
             st.warning("Moved event could not be matched to stored events.")
 
-    # --- show raw events for debug (optional) ---
-    # st.subheader("Stored events (session)")
-    # st.write(events)
-    # print(events)
+
 
 
 KANBAN_COLUMNS = ["TODO", "IN PROGRESS", "DONE"]
