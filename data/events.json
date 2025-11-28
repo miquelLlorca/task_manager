@@ -1,1 +1,79 @@
-[]
+[
+  {
+    "id": "a4074955-23ad-46f1-95d1-e26e633f26c9",
+    "title": "Parcial 1",
+    "description": "15:00 a 17:00. Depuraci\u00f3n y transformaci\u00f3n de software.",
+    "category": "TVD",
+    "status": "TODO",
+    "allDay": true,
+    "color": "#4CAF50",
+    "start": "2025-12-15",
+    "end": "2025-12-15"
+  },
+  {
+    "id": "19dfce03-5125-4c00-b937-82985ba8d988",
+    "title": "Parcial 2",
+    "description": "15:00 a 17:00. Validaci\u00f3n de software.",
+    "category": "TVD",
+    "status": "TODO",
+    "allDay": true,
+    "color": "#4CAF50",
+    "start": "2026-01-16",
+    "end": "2026-01-16"
+  },
+  {
+    "id": "80033bc2-5326-41ad-b745-c7588a92a54b",
+    "title": "Recuperaci\u00f3n",
+    "description": "15:00 a 17:00.",
+    "category": "TVD",
+    "status": "TODO",
+    "allDay": true,
+    "color": "#4CAF50",
+    "start": "2026-01-28",
+    "end": "2026-01-28"
+  },
+  {
+    "id": "b41b055c-d7f1-4abf-88c6-2be38d12b14c",
+    "title": "Parcial 1",
+    "description": "15:00 a 17:00. Terminaci\u00f3n de la reescritura. Labs 2 y 3.",
+    "category": "AVS",
+    "status": "TODO",
+    "allDay": true,
+    "color": "#2dfbff",
+    "start": "2026-01-09",
+    "end": "2026-01-09"
+  },
+  {
+    "id": "60b23441-235b-4c72-aa20-ac9a69492056",
+    "title": "Parcial 2",
+    "description": "15:00 a 17:00. Terminaci\u00f3on programas imperativos. Labs 2 y 3.",
+    "category": "AVS",
+    "status": "TODO",
+    "allDay": true,
+    "color": "#2dfbff",
+    "start": "2026-01-19",
+    "end": "2026-01-19"
+  },
+  {
+    "id": "deb20a55-b918-47f1-8831-a5952c8a0b89",
+    "title": "Recuperaci\u00f3n",
+    "description": "15:00 a 17:00. Recuperaci\u00f3n. Labs 2 y 3.",
+    "category": "AVS",
+    "status": "TODO",
+    "allDay": true,
+    "color": "#2dfbff",
+    "start": "2026-01-29",
+    "end": "2026-01-29"
+  },
+  {
+    "id": "d687c0f6-66f1-4431-9ca5-c9507232b965",
+    "title": "Entrega Proyecto",
+    "description": "23:55. Hacer autoevaluaci\u00f3n tambien.",
+    "category": "TGD",
+    "status": "TODO",
+    "allDay": true,
+    "color": "#ffac07",
+    "start": "2026-01-25",
+    "end": "2026-01-25"
+  }
+]
