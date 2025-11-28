@@ -38,6 +38,16 @@ def get_color_from_category(categories, category_name):
         if(c['name']==category_name):
             return c['color']
 
+def readable_text_color(hex_color):
+    """
+    Returns black or white depending on background color brightness.
+    Uses perceived luminance.
+    """
+    hex_color = hex_color.lstrip("#")
+    r, g, b = int(hex_color[0:2], 16), int(hex_color[2:4], 16), int(hex_color[4:6], 16)
+    brightness = (r*299 + g*587 + b*114) / 1000  # weighted luminance
+    return "black" if brightness > 150 else "white"
+
 
 def to_date_str(iso_like):
     """Return 'YYYY-MM-DD' from an ISO-like datetime string or date string."""

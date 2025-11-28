@@ -77,6 +77,7 @@ with cols[1].expander("➕ Add New Category", expanded=False):
             'name': category_name, 'color':color
         })
         save_categories(categories)
+        st.rerun()
 
 cols = st.columns([1,5,1])
 if(view==CALENDAR):
