@@ -9,7 +9,7 @@ CALENDAR = "Calendar"
 KANBAN = "Kanban"
 BACKLOG = "Backlog"
 
-st.set_page_config(page_title="Task Manager", layout="centered")
+st.set_page_config(page_title="Task Manager", layout="wide")
 st.title("Task Manager")
 
 events = load_events()
@@ -24,8 +24,9 @@ view = st.sidebar.radio(
 
 TASK_STATUSES = ["TODO", "IN PROGRESS", "DONE"]
 DEFAULT_COLOR = "#4CAF50"  # default green
+cols = st.columns([1,2,1])
 
-with st.expander("➕ Add New Task", expanded=view==CALENDAR):
+with cols[1].expander("➕ Add New Task", expanded=view==CALENDAR):
     # --- Add task UI ---
     task_name = st.text_input("Task name")
     category_name = st.selectbox("Category", options=[c['name'] for c in categories])
@@ -68,7 +69,7 @@ with st.expander("➕ Add New Task", expanded=view==CALENDAR):
             st.rerun()
 
 
-with st.expander("➕ Add New Category", expanded=False):
+with cols[1].expander("➕ Add New Category", expanded=False):
     category_name = st.text_input("Category name")
     color = st.color_picker("Category color", value=DEFAULT_COLOR)
     if(st.button('Create Category')):
@@ -77,9 +78,10 @@ with st.expander("➕ Add New Category", expanded=False):
         })
         save_categories(categories)
 
+cols = st.columns([1,5,1])
 if(view==CALENDAR):
-
-    calendar_view(events)
+    with cols[1]:
+        calendar_view(events)
 elif(view == "Kanban"):
     kanban_view(events)
 elif(view == "Backlog"):

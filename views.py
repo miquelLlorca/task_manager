@@ -91,9 +91,21 @@ def calendar_view(events):
             st.warning("Moved event could not be matched to stored events.")
 
 
+#######################################################################################################################
+#######################################################################################################################
+#######################################################################################################################
 
 
 KANBAN_COLUMNS = ["TODO", "IN PROGRESS", "DONE"]
+def readable_text_color(hex_color):
+    """
+    Returns black or white depending on background color brightness.
+    Uses perceived luminance.
+    """
+    hex_color = hex_color.lstrip("#")
+    r, g, b = int(hex_color[0:2], 16), int(hex_color[2:4], 16), int(hex_color[4:6], 16)
+    brightness = (r*299 + g*587 + b*114) / 1000  # weighted luminance
+    return "black" if brightness > 150 else "white"
 
 def kanban_view(events):
     st.header("Task Columns")
@@ -102,28 +114,54 @@ def kanban_view(events):
     for i, col_name in enumerate(KANBAN_COLUMNS):
         with cols[i]:
             st.subheader(col_name)
+
             for ev in events:
-                if ev.get("status", "TODO") == col_name:
-                    st.write(f"- {ev['title']}")
-                    
-                    # Move buttons
-                    if i > 0:
-                        if st.button("←", key=f"{ev['id']}-back"):
-                            ev["status"] = KANBAN_COLUMNS[i-1]
-                            save_events(events)
-                            st.rerun()
-                    if i < len(KANBAN_COLUMNS)-1:
-                        if st.button("→", key=f"{ev['id']}-fwd"):
-                            ev["status"] = KANBAN_COLUMNS[i+1]
-                            save_events(events)
-                            st.rerun()
+                # Exclude backlog tasks
+                if ev.get("status") == col_name and ev.get("start") is not None:
+                    # Use category color or fallback
+                    color = ev.get("color") or "#DDDDDD"
 
-                    # Optional delete button
-                    if st.button("🗑️", key=f"{ev['id']}-del"):
-                        events = [e for e in events if e["id"] != ev["id"]]
-                        save_events(events)
-                        st.rerun()
+                    # Container for the task
+                    with st.container():
+                        text_color = readable_text_color(color)
 
+                        st.markdown(
+                            f"""
+                            <div style="
+                                background-color:{color};
+                                color:{text_color};
+                                padding:10px;
+                                border-radius:5px;
+                                margin-bottom:8px;
+                            ">
+                                <strong>{ev['title']}</strong><br>
+                                <em>{ev.get('category', '')}</em><br>
+                                {ev.get('description','')}<br>
+                                <small>{ev.get('start')} → {ev.get('end','')}</small>
+                            </div>
+                            """,
+                            unsafe_allow_html=True
+                        )
+
+                        # Move buttons
+                        move_cols = st.columns(3)
+                        with move_cols[0]:
+                            if i > 0:
+                                if st.button("←", key=f"{ev['id']}-back"):
+                                    ev["status"] = KANBAN_COLUMNS[i-1]
+                                    save_events(events)
+                                    st.rerun()
+                        with move_cols[1]:
+                            if st.button("🗑️", key=f"{ev['id']}-del"):
+                                events[:] = [e for e in events if e["id"] != ev["id"]]
+                                save_events(events)
+                                st.rerun()
+                        with move_cols[2]:
+                            if i < len(KANBAN_COLUMNS)-1:
+                                if st.button("→", key=f"{ev['id']}-fwd"):
+                                    ev["status"] = KANBAN_COLUMNS[i+1]
+                                    save_events(events)
+                                    st.rerun()
 
 #######################################################################################################################
 #######################################################################################################################
