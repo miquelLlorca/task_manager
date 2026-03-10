@@ -1,5 +1,5 @@
 import streamlit as st
-from datetime import datetime
+import datetime
 from uuid import uuid4
 from data import *
 from views import *
@@ -37,7 +37,7 @@ with cols[1].expander("➕ Add New Task", expanded=view==CALENDAR):
 
     col1, col2 = st.columns(2)
     with col1:
-        start_date = st.date_input("Start date", value=datetime.now())
+        start_date = st.date_input("Start date", value=datetime.datetime.now())
     with col2:
         end_date = st.date_input("End date", value=start_date)
 
